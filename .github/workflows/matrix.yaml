@@ -31,3 +31,7 @@ jobs:
     needs: build
     # can also be a path in a different repo
     uses: ./.github/workflows/reusable.yaml
+    with:
+      artifact-name: my-artifact
+    #secret:
+    #  secret-name: ${{ secrets.xyz }}
