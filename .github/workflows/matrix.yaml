@@ -1,11 +1,11 @@
 name: matrix demo
-on: push
+on: workflow_dispatch
 jobs:
   build:
     continue-on-error: true # to make sure all jobs are run.
     strategy:
       matrix:
-        node-version: [12, 14, 16]
+        node-version: [12, 16]
         operating-system: [ubuntu-latest, windows-latest]
         # additional combinations, can also add new keys here.
         include:
@@ -26,3 +26,8 @@ jobs:
         run: npm ci
       - name: build
         run: npm run build
+
+  deploy:
+    needs: build
+    # can also be a path in a different repo
+    uses: ./.github/workflows/reusable.yaml

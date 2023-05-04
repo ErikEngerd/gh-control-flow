@@ -1,0 +1,8 @@
+name: reusable deploy
+on: workflow_call # workflow_dispatch is manual invocation through a button.
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: output
+        run: echo "deploying and uploading"
