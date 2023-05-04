@@ -1,8 +1,19 @@
 name: reusable deploy
-on: workflow_call # workflow_dispatch is manual invocation through a button.
+on:
+  # workflow_dispatch is manual invocation through a button.
+  workflow_call:
+    inputs:
+      artifact-name:
+        description: artifact name
+        # optional
+        required: false
+        default: dist
+        type: string # number, boolean
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: get code
+        run: echo artifact name ${{ inputs.artifact-name }}
       - name: output
         run: echo "deploying and uploading"
