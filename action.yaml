@@ -1,0 +1,29 @@
+
+# remote action for testing
+
+name: custom
+description: my custom action
+
+inputs:
+  artifact-name:
+    description: artifact name
+    # optional
+    required: false
+    default: dist
+    type: string # number, boolean
+outputs:
+  result:
+    description: result of deploy
+    value: ${{ jobs.deploy.outputs.outcome }}
+
+runs:
+  using: composite
+  steps:
+    - name: get code
+      run: echo artifact name ${{ inputs.artifact-name }}
+    - name: output
+      run: echo "deploying and uploading"
+    - name: set result output
+      io: set-result
+      run: echo "::set-output name=step-result::success"
+      #run: echo "step-result=success" >> $GITHUB_OUTPUT
